@@ -10,127 +10,114 @@
   <meta property="og:url" content="https://tanini.net">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="tr_TR">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bej: #f5f0e8; --bej-koyu: #e8dfc8; --bordo: #7a1f2e;
-      --bordo-acik: #a33345; --bordo-soluk: #d4a0a8;
-      --siyah: #1c1410; --gri: #6b5f58; --gri-acik: #b5a99f;
-      --ecrin: #4a6741; --ecrin-acik: #d6e8d2; --ecrin-orta: #7a9e74;
-      --mert: #2d4a6e; --mert-acik: #c8d9ee; --mert-orta: #5a7fa8;
-      --mirza: #7a4f1e; --mirza-acik: #eed9c0; --mirza-orta: #b07a44;
-      --misafir: #5a3d6b; --misafir-acik: #ddd0ea; --misafir-orta: #9070a8;
-      --serif: 'Georgia', 'Times New Roman', serif;
-      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bej:#f5f0e8;--bej-koyu:#e8dfc8;--bordo:#7a1f2e;--bordo-acik:#a33345;--bordo-soluk:#d4a0a8;
+      --siyah:#1c1410;--gri:#6b5f58;--gri-acik:#b5a99f;
+      --ecrin:#4a6741;--ecrin-acik:#d6e8d2;--ecrin-orta:#7a9e74;
+      --mert:#2d4a6e;--mert-acik:#c8d9ee;--mert-orta:#5a7fa8;
+      --mirza:#7a4f1e;--mirza-acik:#eed9c0;--mirza-orta:#b07a44;
+      --misafir:#5a3d6b;--misafir-acik:#ddd0ea;--misafir-orta:#9070a8;
+      --serif:Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,sans-serif;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); background: var(--bej); color: var(--siyah); font-size: 16px; line-height: 1.75; font-weight: 300; }
-    nav { position: sticky; top: 0; z-index: 100; background: var(--bordo); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-    .nav-logo { font-family: var(--serif); font-size: 1.6rem; color: var(--bej); text-decoration: none; letter-spacing: 0.06em; font-style: italic; }
-    .hamburger { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 8px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--bej); border-radius: 2px; transition: all 0.3s; }
-    .hamburger.acik span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.acik span:nth-child(2) { opacity: 0; }
-    .hamburger.acik span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 98; }
-    .menu-overlay.acik { display: block; }
-    .menu-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--bordo); z-index: 99; transition: right 0.35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; padding: 5rem 0 3rem; box-shadow: -4px 0 24px rgba(0,0,0,0.2); }
-    .menu-drawer.acik { right: 0; }
-    .menu-drawer a { display: flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.75); text-decoration: none; font-weight: 400; border-left: 3px solid transparent; transition: all 0.2s; }
-    .menu-drawer a:hover { color: var(--bej); background: rgba(255,255,255,0.06); }
-    .menu-drawer a.ecrin:hover, .menu-drawer a.ecrin.active { border-color: var(--ecrin-orta); color: var(--bej); }
-    .menu-drawer a.mert:hover, .menu-drawer a.mert.active { border-color: var(--mert-orta); color: var(--bej); }
-    .menu-drawer a.mirza:hover, .menu-drawer a.mirza.active { border-color: var(--mirza-orta); color: var(--bej); }
-    .menu-drawer a.misafir:hover, .menu-drawer a.misafir.active { border-color: var(--misafir-orta); color: var(--bej); }
-    .menu-drawer a.bizkimiz:hover, .menu-drawer a.bizkimiz.active { border-color: var(--bordo-soluk); color: var(--bej); }
-    .menu-drawer-ayirac { margin: 1rem 2.5rem; border: none; border-top: 1px solid rgba(255,255,255,0.12); }
-    .menu-nokta { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .hero { background: var(--bordo); color: var(--bej); padding: 5rem 3rem 4rem; text-align: center; border-bottom: 4px solid var(--bej-koyu); }
-    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bordo-soluk); margin-bottom: 1rem; }
-    .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 1rem; font-style: italic; }
-    .hero p { font-size: 0.95rem; color: rgba(245,240,232,0.65); max-width: 480px; margin: 0 auto; }
-    .page { display: none; }
-    .page.active { display: block; }
-    .anasayfa-grid { max-width: 1000px; margin: 0 auto; padding: 3.5rem 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .yazar-karti { border-radius: 6px; overflow: hidden; border: 1px solid var(--bej-koyu); background: #fff; display: flex; flex-direction: column; }
-    .yazar-karti-baslik { padding: 1.25rem 1.5rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
-    .yazar-nokta { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .yazar-karti-baslik h2 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; letter-spacing: 0.02em; }
-    .yazar-karti-baslik .goster-btn { margin-left: auto; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 3px; transition: background 0.2s, color 0.2s; }
-    .yazi-listesi { list-style: none; padding: 0 1.5rem 1.5rem; flex: 1; }
-    .yazi-listesi li { padding: 0.6rem 0; border-top: 1px solid var(--bej-koyu); display: flex; flex-direction: column; gap: 0.1rem; }
-    .yazi-listesi li:first-child { border-top: none; }
-    .yazi-baslik { font-family: var(--serif); font-size: 0.95rem; color: var(--siyah); text-decoration: none; line-height: 1.4; }
-    .yazi-baslik:hover { text-decoration: underline; text-decoration-thickness: 1px; }
-    .yazi-tarih { font-size: 0.7rem; color: var(--gri-acik); letter-spacing: 0.06em; }
-    .ecrin-tema .yazar-karti-baslik { background: var(--ecrin-acik); border-bottom: 2px solid var(--ecrin-orta); }
-    .ecrin-tema .yazar-nokta { background: var(--ecrin); }
-    .ecrin-tema .yazar-karti-baslik h2 { color: var(--ecrin); }
-    .ecrin-tema .goster-btn { background: var(--ecrin); color: #fff; }
-    .ecrin-tema .goster-btn:hover { background: var(--ecrin-orta); }
-    .mert-tema .yazar-karti-baslik { background: var(--mert-acik); border-bottom: 2px solid var(--mert-orta); }
-    .mert-tema .yazar-nokta { background: var(--mert); }
-    .mert-tema .yazar-karti-baslik h2 { color: var(--mert); }
-    .mert-tema .goster-btn { background: var(--mert); color: #fff; }
-    .mert-tema .goster-btn:hover { background: var(--mert-orta); }
-    .mirza-tema .yazar-karti-baslik { background: var(--mirza-acik); border-bottom: 2px solid var(--mirza-orta); }
-    .mirza-tema .yazar-nokta { background: var(--mirza); }
-    .mirza-tema .yazar-karti-baslik h2 { color: var(--mirza); }
-    .mirza-tema .goster-btn { background: var(--mirza); color: #fff; }
-    .mirza-tema .goster-btn:hover { background: var(--mirza-orta); }
-    .misafir-tema .yazar-karti-baslik { background: var(--misafir-acik); border-bottom: 2px solid var(--misafir-orta); }
-    .misafir-tema .yazar-nokta { background: var(--misafir); }
-    .misafir-tema .yazar-karti-baslik h2 { color: var(--misafir); }
-    .misafir-tema .goster-btn { background: var(--misafir); color: #fff; }
-    .misafir-tema .goster-btn:hover { background: var(--misafir-orta); }
-    .misafir-tema { grid-column: 1 / -1; }
-    .misafir-tema .yazi-listesi { columns: 2; gap: 0; }
-    .misafir-tema .yazi-listesi li { break-inside: avoid; }
-    .yazar-hero { padding: 3.5rem 3rem 2.5rem; border-bottom: 1px solid var(--bej-koyu); }
-    .yazar-hero-ic { max-width: 800px; margin: 0 auto; display: flex; align-items: flex-end; gap: 2rem; }
-    .yazar-avatar { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.8rem; font-style: italic; color: #fff; flex-shrink: 0; }
-    .yazar-hero-metin h2 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; font-style: italic; margin-bottom: 0.4rem; }
-    .yazar-hero-metin p { font-size: 0.9rem; color: var(--gri); max-width: 480px; }
-    .yazar-yazi-listesi { max-width: 800px; margin: 0 auto; padding: 2.5rem 3rem; }
-    .yazar-yazi-listesi h3 { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gri-acik); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--bej-koyu); }
-    .yazi-satir { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--bej-koyu); text-decoration: none; color: var(--siyah); transition: background 0.15s; }
-    .yazi-satir:hover { background: rgba(0,0,0,0.02); }
-    .yazi-satir-sol { flex: 1; }
-    .yazi-satir-baslik { font-family: var(--serif); font-size: 1.05rem; line-height: 1.35; margin-bottom: 0.2rem; }
-    .yazi-satir-kategori { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .yazi-satir-tarih { font-size: 0.78rem; color: var(--gri-acik); white-space: nowrap; }
-    footer { background: #1c1410; color: rgba(245,240,232,0.45); text-align: center; padding: 2rem 3rem; font-size: 0.78rem; letter-spacing: 0.06em; margin-top: 4rem; width: 100%; }
-    footer span { font-family: var(--serif); font-style: italic; color: rgba(245,240,232,0.7); }
-    footer .email-link { color: rgba(245,240,232,0.45); }
-    .email-link { color: rgba(245,240,232,0.45); text-decoration: none; cursor: pointer; }
-    .email-link:hover { color: var(--bej); }
-    .email-link-bordo { color: var(--bordo); text-decoration: none; border-bottom: 1px solid var(--bordo-soluk); cursor: pointer; }
-
-    .dark-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 6px 8px; color: rgba(245,240,232,0.75); transition: color 0.2s; line-height: 1; }
-    .dark-btn:hover { color: var(--bej); }
-
-    body.dark {
-      --bej: #1f1f1f; --bej-koyu: #2a2a2a;
-      --siyah: #e8e6e1; --gri: #a0a0a0; --gri-acik: #5a5a5a;
-      --ecrin-acik: #1a2419; --mert-acik: #161e2a; --mirza-acik: #221a10; --misafir-acik: #1c1525;
-      --bordo-soluk: #8a4050;
-    }
-    body.dark .yazar-karti { background: #282828; border-color: #333; }
-    body.dark .yazi-listesi li { border-color: #333; }
-    body.dark .yazar-yazi-listesi h3 { border-color: #333; }
-    body.dark .yazi-satir { border-color: #333; }
-    body.dark .yazar-hero { border-color: #333; }
-    @media (max-width: 680px) {
-      nav { padding: 0 1rem; }
-      .hero { padding: 3rem 1.5rem 2.5rem; }
-      .anasayfa-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
-      .misafir-tema { grid-column: 1; }
-      .misafir-tema .yazi-listesi { columns: 1; }
-      .yazar-yazi-listesi { padding: 2rem 1.5rem; }
-      .yazar-hero { padding: 2rem 1.5rem; }
-      .yazar-hero-ic { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--bej);color:var(--siyah);font-size:16px;line-height:1.75;font-weight:300}
+    nav{position:sticky;top:0;z-index:100;background:var(--bordo);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+    .nav-logo{font-family:var(--serif);font-size:1.6rem;color:var(--bej);text-decoration:none;letter-spacing:0.06em;font-style:italic}
+    .hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:8px}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--bej);border-radius:2px;transition:all 0.3s}
+    .hamburger.acik span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.acik span:nth-child(2){opacity:0}
+    .hamburger.acik span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:98}
+    .menu-overlay.acik{display:block}
+    .menu-drawer{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--bordo);z-index:99;transition:right 0.35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:5rem 0 3rem;box-shadow:-4px 0 24px rgba(0,0,0,0.2)}
+    .menu-drawer.acik{right:0}
+    .menu-drawer a{display:flex;align-items:center;gap:1rem;padding:1rem 2.5rem;font-size:0.95rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.75);text-decoration:none;font-weight:400;border-left:3px solid transparent;transition:all 0.2s}
+    .menu-drawer a:hover{color:var(--bej);background:rgba(255,255,255,0.06)}
+    .menu-drawer a.ecrin:hover,.menu-drawer a.ecrin.active{border-color:var(--ecrin-orta);color:var(--bej)}
+    .menu-drawer a.mert:hover,.menu-drawer a.mert.active{border-color:var(--mert-orta);color:var(--bej)}
+    .menu-drawer a.mirza:hover,.menu-drawer a.mirza.active{border-color:var(--mirza-orta);color:var(--bej)}
+    .menu-drawer a.misafir:hover,.menu-drawer a.misafir.active{border-color:var(--misafir-orta);color:var(--bej)}
+    .menu-drawer a.bizkimiz:hover,.menu-drawer a.bizkimiz.active{border-color:var(--bordo-soluk);color:var(--bej)}
+    .menu-drawer-ayirac{margin:1rem 2.5rem;border:none;border-top:1px solid rgba(255,255,255,0.12)}
+    .menu-nokta{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .dark-btn{background:none;border:none;cursor:pointer;padding:1rem 2.5rem;font-size:0.95rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.75);font-weight:400;border-left:3px solid transparent;transition:all 0.2s;text-align:left;width:100%;font-family:var(--sans)}
+    .dark-btn:hover{color:var(--bej);background:rgba(255,255,255,0.06)}
+    .hero{background:var(--bordo);color:var(--bej);padding:5rem 3rem 4rem;text-align:center;border-bottom:4px solid var(--bej-koyu)}
+    .hero-eyebrow{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--bordo-soluk);margin-bottom:1rem}
+    .hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:400;letter-spacing:0.04em;margin-bottom:1rem;font-style:italic}
+    .hero p{font-size:0.95rem;color:rgba(245,240,232,0.65);max-width:480px;margin:0 auto}
+    .page{display:none}.page.active{display:block}
+    .anasayfa-grid{max-width:1000px;margin:0 auto;padding:3.5rem 3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+    .yazar-karti{border-radius:6px;overflow:hidden;border:1px solid var(--bej-koyu);background:#fff;display:flex;flex-direction:column}
+    .yazar-karti-baslik{padding:1.25rem 1.5rem 1rem;display:flex;align-items:center;gap:0.75rem}
+    .yazar-nokta{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .yazar-karti-baslik h2{font-family:var(--serif);font-size:1.1rem;font-weight:600;letter-spacing:0.02em}
+    .yazar-karti-baslik .goster-btn{margin-left:auto;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;font-weight:700;padding:0.3rem 0.75rem;border-radius:3px;transition:background 0.2s,color 0.2s}
+    .yazi-listesi{list-style:none;padding:0 1.5rem 1.5rem;flex:1}
+    .yazi-listesi li{padding:0.6rem 0;border-top:1px solid var(--bej-koyu);display:flex;flex-direction:column;gap:0.1rem}
+    .yazi-listesi li:first-child{border-top:none}
+    .yazi-baslik{font-family:var(--serif);font-size:0.95rem;color:var(--siyah);text-decoration:none;line-height:1.4}
+    .yazi-baslik:hover{text-decoration:underline;text-decoration-thickness:1px}
+    .yazi-tarih{font-size:0.7rem;color:var(--gri-acik);letter-spacing:0.06em}
+    .ecrin-tema .yazar-karti-baslik{background:var(--ecrin-acik);border-bottom:2px solid var(--ecrin-orta)}
+    .ecrin-tema .yazar-nokta{background:var(--ecrin)}
+    .ecrin-tema .yazar-karti-baslik h2{color:var(--ecrin)}
+    .ecrin-tema .goster-btn{background:var(--ecrin);color:#fff}
+    .ecrin-tema .goster-btn:hover{background:var(--ecrin-orta)}
+    .mert-tema .yazar-karti-baslik{background:var(--mert-acik);border-bottom:2px solid var(--mert-orta)}
+    .mert-tema .yazar-nokta{background:var(--mert)}
+    .mert-tema .yazar-karti-baslik h2{color:var(--mert)}
+    .mert-tema .goster-btn{background:var(--mert);color:#fff}
+    .mert-tema .goster-btn:hover{background:var(--mert-orta)}
+    .mirza-tema .yazar-karti-baslik{background:var(--mirza-acik);border-bottom:2px solid var(--mirza-orta)}
+    .mirza-tema .yazar-nokta{background:var(--mirza)}
+    .mirza-tema .yazar-karti-baslik h2{color:var(--mirza)}
+    .mirza-tema .goster-btn{background:var(--mirza);color:#fff}
+    .mirza-tema .goster-btn:hover{background:var(--mirza-orta)}
+    .misafir-tema .yazar-karti-baslik{background:var(--misafir-acik);border-bottom:2px solid var(--misafir-orta)}
+    .misafir-tema .yazar-nokta{background:var(--misafir)}
+    .misafir-tema .yazar-karti-baslik h2{color:var(--misafir)}
+    .misafir-tema .goster-btn{background:var(--misafir);color:#fff}
+    .misafir-tema .goster-btn:hover{background:var(--misafir-orta)}
+    .misafir-tema{grid-column:1/-1}
+    .misafir-tema .yazi-listesi{columns:2;gap:0}
+    .misafir-tema .yazi-listesi li{break-inside:avoid}
+    .yazar-hero{padding:3.5rem 3rem 2.5rem;border-bottom:1px solid var(--bej-koyu)}
+    .yazar-hero-ic{max-width:800px;margin:0 auto;display:flex;align-items:flex-end;gap:2rem}
+    .yazar-avatar{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.8rem;font-style:italic;color:#fff;flex-shrink:0}
+    .yazar-hero-metin h2{font-family:var(--serif);font-size:2.2rem;font-weight:400;font-style:italic;margin-bottom:0.4rem}
+    .yazar-hero-metin p{font-size:0.9rem;color:var(--gri);max-width:480px}
+    .yazar-yazi-listesi{max-width:800px;margin:0 auto;padding:2.5rem 3rem}
+    .yazar-yazi-listesi h3{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gri-acik);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--bej-koyu)}
+    .yazi-satir{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--bej-koyu);text-decoration:none;color:var(--siyah);transition:background 0.15s}
+    .yazi-satir:hover{background:rgba(0,0,0,0.02)}
+    .yazi-satir-sol{flex:1}
+    .yazi-satir-baslik{font-family:var(--serif);font-size:1.05rem;line-height:1.35;margin-bottom:0.2rem}
+    .yazi-satir-kategori{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase}
+    .yazi-satir-tarih{font-size:0.78rem;color:var(--gri-acik);white-space:nowrap}
+    footer{background:#1c1410;color:rgba(245,240,232,0.45);text-align:center;padding:2rem 3rem;font-size:0.78rem;letter-spacing:0.06em;margin-top:4rem;width:100%}
+    footer span{font-family:var(--serif);font-style:italic;color:rgba(245,240,232,0.7)}
+    .email-link{color:rgba(245,240,232,0.45);text-decoration:none;cursor:pointer}
+    .email-link:hover{color:var(--bej)}
+    .email-link-bordo{color:var(--bordo);text-decoration:none;border-bottom:1px solid var(--bordo-soluk);cursor:pointer}
+    body.dark{--bej:#1f1f1f;--bej-koyu:#2a2a2a;--siyah:#e8e6e1;--gri:#a0a0a0;--gri-acik:#5a5a5a;--ecrin-acik:#1a2419;--mert-acik:#161e2a;--mirza-acik:#221a10;--misafir-acik:#1c1525;--bordo-soluk:#8a4050}
+    body.dark .yazar-karti{background:#282828;border-color:#333}
+    body.dark .yazi-listesi li{border-color:#333}
+    body.dark .yazar-yazi-listesi h3{border-color:#333}
+    body.dark .yazi-satir{border-color:#333}
+    body.dark .yazar-hero{border-color:#333}
+    @media(max-width:680px){
+      nav{padding:0 1rem}
+      .hero{padding:3rem 1.5rem 2.5rem}
+      .anasayfa-grid{grid-template-columns:1fr;padding:2rem 1.5rem}
+      .misafir-tema{grid-column:1}
+      .misafir-tema .yazi-listesi{columns:1}
+      .yazar-yazi-listesi{padding:2rem 1.5rem}
+      .yazar-hero{padding:2rem 1.5rem}
+      .yazar-hero-ic{flex-direction:column;gap:1rem;align-items:flex-start}
     }
   </style>
 </head>
@@ -138,12 +125,12 @@
 
   <div class="menu-overlay" id="menu-overlay" onclick="menuKapat()"></div>
   <div class="menu-drawer" id="menu-drawer">
-    <a href="#" id="dark-btn" onclick="darkToggle(); return false;">☀️ &nbsp;Açık Tema</a>
+    <button class="dark-btn" id="dark-btn" onclick="darkToggle()">&#9728;&#65039; &nbsp;A&ccedil;&imath;k Tema</button>
     <hr class="menu-drawer-ayirac">
-    <a href="#" class="ecrin" onclick="showPage('ecrin'); menuKapat(); return false;"><span class="menu-nokta" style="background: var(--ecrin-orta);"></span>Ecrin</a>
-    <a href="#" class="mert" onclick="showPage('mert'); menuKapat(); return false;"><span class="menu-nokta" style="background: var(--mert-orta);"></span>Mert</a>
-    <a href="#" class="mirza" onclick="showPage('mirza'); menuKapat(); return false;"><span class="menu-nokta" style="background: var(--mirza-orta);"></span>Mirza</a>
-    <a href="#" class="misafir" onclick="showPage('misafir'); menuKapat(); return false;"><span class="menu-nokta" style="background: var(--misafir-orta);"></span>Misafir Yazarlar</a>
+    <a href="#" class="ecrin" onclick="showPage('ecrin'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--ecrin-orta);"></span>Ecrin Rak&imath;c&imath;</a>
+    <a href="#" class="mert" onclick="showPage('mert'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--mert-orta);"></span>Mert G&uuml;zel</a>
+    <a href="#" class="mirza" onclick="showPage('mirza'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--mirza-orta);"></span>Mirza Kasap</a>
+    <a href="#" class="misafir" onclick="showPage('misafir'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--misafir-orta);"></span>Misafir Yazarlar</a>
     <hr class="menu-drawer-ayirac">
     <a href="#" class="bizkimiz" onclick="showPage('bizkimiz'); menuKapat(); return false;">Biz Kimiz</a>
   </div>
@@ -209,28 +196,28 @@
 
   <!-- ECRİN -->
   <div id="page-ecrin" class="page">
-    <div class="yazar-hero" style="background: var(--ecrin-acik); border-bottom: 2px solid var(--ecrin-orta);">
+    <div class="yazar-hero" style="background:var(--ecrin-acik);border-bottom:2px solid var(--ecrin-orta);">
       <div class="yazar-hero-ic">
-        <div class="yazar-avatar" style="background: var(--ecrin);">E</div>
+        <div class="yazar-avatar" style="background:var(--ecrin);">E</div>
         <div class="yazar-hero-metin">
-          <h2 style="color: var(--ecrin);">Ecrin Rakıcı</h2>
+          <h2 style="color:var(--ecrin);">Ecrin Rakıcı</h2>
           <p>ecrinrakici.53@gmail.com</p>
         </div>
       </div>
     </div>
     <div class="yazar-yazi-listesi">
       <h3>Tüm Yazılar</h3>
-      <p style="color: var(--gri-acik); font-size: 0.9rem;">Henüz yazı yok.</p>
+      <p style="color:var(--gri-acik);font-size:0.9rem;">Henüz yazı yok.</p>
     </div>
   </div>
 
   <!-- MERT -->
   <div id="page-mert" class="page">
-    <div class="yazar-hero" style="background: var(--mert-acik); border-bottom: 2px solid var(--mert-orta);">
+    <div class="yazar-hero" style="background:var(--mert-acik);border-bottom:2px solid var(--mert-orta);">
       <div class="yazar-hero-ic">
-        <div class="yazar-avatar" style="background: var(--mert);">M</div>
+        <div class="yazar-avatar" style="background:var(--mert);">M</div>
         <div class="yazar-hero-metin">
-          <h2 style="color: var(--mert);">Mert Güzel</h2>
+          <h2 style="color:var(--mert);">Mert Güzel</h2>
           <p>mert-guzell@outlook.com</p>
         </div>
       </div>
@@ -240,53 +227,20 @@
       <a class="yazi-satir" href="mert-dilden-once-sarkilar-vardi.html">
         <div class="yazi-satir-sol">
           <div class="yazi-satir-baslik">Dilden Önce Şarkılar Vardı — Müziğin Doğuşu ve Hmmmmm Teorisi</div>
-          <div class="yazi-satir-kategori" style="color: var(--mert-orta);">Tarih</div>
+          <div class="yazi-satir-kategori" style="color:var(--mert-orta);">Tarih</div>
         </div>
         <div class="yazi-satir-tarih">20 Mart 2026</div>
       </a>
     </div>
   </div>
 
-  <!-- MERT YAZI 1 -->
-  <div id="page-mert-yazi-1" class="page">
-    <div style="max-width: 720px; margin: 0 auto; padding: 3rem 3rem 5rem;">
-      <div style="margin-bottom: 1.5rem;">
-        <a href="#" onclick="showPage('mert'); return false;" style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mert-orta); text-decoration: none;">← Mert</a>
-      </div>
-      <div style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gri-acik); margin-bottom: 1rem;">Tarih &nbsp;·&nbsp; 20 Mart 2026</div>
-      <h1 style="font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 400; line-height: 1.25; margin-bottom: 2rem; color: var(--siyah);">Dilden Önce Şarkılar Vardı — Müziğin Doğuşu ve Hmmmmm Teorisi</h1>
-      <img src="data:image/jpeg;base64,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" alt="The Singing Neanderthals kitap kapağı" style="width: 100%; max-width: 320px; display: block; margin: 0 auto 2.5rem; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
-      <div style="font-size: 1rem; line-height: 1.9; color: var(--gri);">
-        <p style="margin-bottom: 1.25rem;">Müziğin nasıl ortaya çıktığı asırlardır tartışılan bir konu. Antik Dünya'da müziğin tanrılar tarafından insanlara verilen, tanrılara tapınmak için kullanılacak ve kozmolojik sırları içinde barındıran bir hediye olduğu düşünülüyordu. Müziğin insandan gelen bir kökeni yoktu. Fakat Aydınlanma Dönemi ile birlikte bu düşünce değişti. İnsanlık, dini açıklamalardan uzaklaşıp kendi aklı ile düşünmeye başladığında, hayatımızın her yerinde olan müziğin kökeninin ne olduğu da sorulması gereken bir soru haline geldi.</p>
-        <p style="margin-bottom: 1.25rem;">Bu teoriler başlangıçta müziğin kökenini daha temel noktalardan ele aldılar ama günümüze geldiğimizde bu konuyla ilgili çok detaylı, içinde birden fazla disiplinin çalışmalarını barındıran pek çok kapsamlı teorinin ortaya çıktığını görüyoruz. Bugün size bu teoriler arasında önemli yeri olan Hmmmmm Teorisi'nden bahsedeceğim.</p>
-        <p style="margin-bottom: 1.25rem;">Hmmmmm teorisi ilk kez arkeolog Steven Mithen'in <em>The Singing Neanderthals</em> isimli kitabında karşımıza çıkıyor. Teorinin temeli Neandertallerle ilgili enteresan bir bulguya dayanıyor. Neandertaller, atalarından büyük beyinlere sahip. Bu da antropologların uzun yıllar boyunca bunun bir dil kapasitesini gösterdiğini düşünmesine sebep oldu. Mithen ise Neandertallerin bir dile değil, gelişmiş bir iletişim sistemine sahip olduğunu düşünüyordu. Bu sisteme de Hmmmmm ismini verdi. Hmmmmm bu sistemin özelliklerini açıklayan bir kısaltma.</p>
-        <p style="margin-bottom: 1.25rem;"><strong>Holistik (Bütünsel):</strong> Bu sistem müzik veya dil, duygu veya anlam gibi ayrımlar olmadan pek çok anlamı tek bir vokal jestle verebiliyor.</p>
-        <p style="margin-bottom: 1.25rem;"><strong>Multi-Modal:</strong> Ses, jest, yüz ifadesi, beden hareketi gibi farklı kanalları aynı anda kullanıyor.</p>
-        <p style="margin-bottom: 1.25rem;"><strong>Manipülative:</strong> Etrafındaki diğerlerinin hareketlerini etkilemek için kullanılıyor.</p>
-        <p style="margin-bottom: 1.25rem;"><strong>Müzikal:</strong> Bu iletişimin müzikal özellikleri olduğunu belirtiyor: farklı perdeler, ritim, tekrar gibi.</p>
-        <p style="margin-bottom: 1.25rem;"><strong>Mimetik:</strong> Sistemin taklit etmeye dayalı olduğunu söylüyor.</p>
-        <p style="margin-bottom: 1.25rem;">Teoriye göre Neandertaller bu iletişim sistemini, duygularını anlatmak, avlanmak, çiftleşmek, ölüsünü gömmek, alet yapmak gibi hayatının her alanında kullanmıştır. Homo Sapiens'e geldiğimizde ise bu gelişmiş iletişim sisteminin içinden zamanla, doğal seçilim ile dil oluşmuştur. Hmmmmm ile dil arasındaki fark ise her şeyin belirli bir kelimeye karşılık gelmesi ve bu yolla bilgi değişiminin çok daha kolay yapılabilmesi.</p>
-        <p style="margin-bottom: 1.25rem;">Dil geliştikten sonra bu bahsettiğimiz Hmmmmm sistemi artık yalnızca duygu ifade etmek için kullanılıyor ve bundan da müzik ortaya çıkıyor. Yani yine iletişime yarayan müzik, artık duyguları ifade etmek için temel araç haline geliyor.</p>
-        <p style="margin-bottom: 1.25rem;">Yine Mithen'a göre dilin oluşması dini düşünce sisteminin oluşmasının da temelini oluşturuyor. Dini düşünce sistemi ilk defa Homo Sapiens'te görülüyor. Bu dini, doğa üstü varlıklarla konuşmak ta müzik üzerinden gerçekleşiyor.</p>
-        <p style="margin-bottom: 1.25rem;">Müzik artık hayatta kalmak için bir gereklilik olmadığından her kültürde farklı bir şekilde gelişiyor. Ve müziğin insanlar arasında sosyal bağ kurma özelliği daha temel bir hale geliyor. Bu da müziğin ritüeller ve dini törenlerdeki yerini açıklıyor.</p>
-        <h2 style="font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--siyah); margin: 2rem 0 1rem;">Sonuç Olarak</h2>
-        <p>Mithen'ın bu teorisi 2005'te akademiye sunulduğunda hızlı bir şekilde müziğin kökeni hakkındaki tartışmalarda kendine önemli bir yer edindi. Pek çok çalışmada bu teori detaylandırıldı, değişikliklerle yeniden sunuldu veya farklı açılardan karşı çıkıldı ama bu teori hala müziğin kökeni hakkındaki tartışmalar için önemli bir referans kaynağı olmaya devam etmekte.</p>
-      </div>
-      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--bej-koyu); display: flex; align-items: center; gap: 1rem;">
-        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--mert); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; color: #fff; font-size: 1rem; flex-shrink: 0;">M</div>
-        <div>
-          <div style="font-family: var(--serif); font-size: 0.95rem; color: var(--mert);">Mert</div>
-          <div style="font-size: 0.78rem; color: var(--gri-acik);">Müziğin kökeninden pop müziğin doğuşuna, her şeyin başlangıcı üzerine yazılar.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- MİRZA -->
   <div id="page-mirza" class="page">
-    <div class="yazar-hero" style="background: var(--mirza-acik); border-bottom: 2px solid var(--mirza-orta);">
+    <div class="yazar-hero" style="background:var(--mirza-acik);border-bottom:2px solid var(--mirza-orta);">
       <div class="yazar-hero-ic">
-        <div class="yazar-avatar" style="background: var(--mirza);">M</div>
+        <div class="yazar-avatar" style="background:var(--mirza);">M</div>
         <div class="yazar-hero-metin">
-          <h2 style="color: var(--mirza);">Mirza Kasap</h2>
+          <h2 style="color:var(--mirza);">Mirza Kasap</h2>
           <p>kasap.mrza@gmail.com</p>
         </div>
       </div>
@@ -296,7 +250,7 @@
       <a class="yazi-satir" href="mirza-vocoding-nedir.html">
         <div class="yazi-satir-sol">
           <div class="yazi-satir-baslik">Vocoding Nedir? Vocoder Nasıl Çalışır?</div>
-          <div class="yazi-satir-kategori" style="color: var(--mirza-orta);">Teknoloji</div>
+          <div class="yazi-satir-kategori" style="color:var(--mirza-orta);">Teknoloji</div>
         </div>
         <div class="yazi-satir-tarih">21 Mart 2026</div>
       </a>
@@ -305,57 +259,57 @@
 
   <!-- MİSAFİR -->
   <div id="page-misafir" class="page">
-    <div class="yazar-hero" style="background: var(--misafir-acik); border-bottom: 2px solid var(--misafir-orta);">
+    <div class="yazar-hero" style="background:var(--misafir-acik);border-bottom:2px solid var(--misafir-orta);">
       <div class="yazar-hero-ic">
-        <div class="yazar-avatar" style="background: var(--misafir);">M</div>
+        <div class="yazar-avatar" style="background:var(--misafir);">M</div>
         <div class="yazar-hero-metin">
-          <h2 style="color: var(--misafir);">Misafir Yazarlar</h2>
+          <h2 style="color:var(--misafir);">Misafir Yazarlar</h2>
           <p>Müzikoloji dünyasından farklı sesler. Konuk yazarlarımızın gözünden müzik, tarih ve kültür.</p>
         </div>
       </div>
     </div>
     <div class="yazar-yazi-listesi">
       <h3>Tüm Yazılar</h3>
-      <p style="color: var(--gri-acik); font-size: 0.9rem;">Henüz yazı yok.</p>
+      <p style="color:var(--gri-acik);font-size:0.9rem;">Henüz yazı yok.</p>
     </div>
   </div>
 
   <!-- BİZ KİMİZ -->
   <div id="page-bizkimiz" class="page">
-    <div class="yazar-hero" style="background: var(--bej-koyu); border-bottom: 2px solid var(--bordo-soluk);">
+    <div class="yazar-hero" style="background:var(--bej-koyu);border-bottom:2px solid var(--bordo-soluk);">
       <div class="yazar-hero-ic">
-        <div class="yazar-avatar" style="background: var(--bordo);">T</div>
+        <div class="yazar-avatar" style="background:var(--bordo);">T</div>
         <div class="yazar-hero-metin">
-          <h2 style="color: var(--bordo);">Biz Kimiz</h2>
+          <h2 style="color:var(--bordo);">Biz Kimiz</h2>
           <p>Tanini, müzik hakkında düşünceleri olan üç öğrencinin not defteridir.</p>
         </div>
       </div>
     </div>
     <div class="yazar-yazi-listesi">
       <h3>Hakkımızda</h3>
-      <p style="color: var(--gri); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.5rem;">Biz kendilerini Antik Yunan'da sanan üç tane müzikoloji öğrencisiyiz. Birbirimizle tartışmaktan yorulduğumuz için bu siteyi açtık. Gerçek dünya problemlerinden uzak ama bir o kadar da yakın olabilecek tartışma konularımızın burada işe yarayacak içeriklere dönüşmesini umuyoruz. Herkesin çok az bilgisi ve çok fazla fikri olduğu, "Kuş sesi müzik midir" gibi basit bir konunun bile 3.5 saat tartışılabildiği, nadiren herhangi bir konuda ortak noktada buluşunabildiği bir topluluğa katılmak istiyorsanız, aramıza hoşgeldiniz.</p>
-      <p style="font-size: 0.9rem; color: var(--gri); margin-bottom: 2.5rem;">İletişim: <span id="iletisim-goster" class="email-link-bordo"></span></p>
-      <h3 style="margin-bottom: 1.5rem;">Yazarlar</h3>
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem; background: var(--ecrin-acik); border-radius: 6px; border-left: 4px solid var(--ecrin);">
-          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--ecrin); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: #fff; flex-shrink: 0;">E</div>
+      <p style="color:var(--gri);font-size:0.95rem;line-height:1.9;margin-bottom:1.5rem;">Biz kendilerini Antik Yunan'da sanan üç tane müzikoloji öğrencisiyiz. Birbirimizle tartışmaktan yorulduğumuz için bu siteyi açtık. Gerçek dünya problemlerinden uzak ama bir o kadar da yakın olabilecek tartışma konularımızın burada işe yarayacak içeriklere dönüşmesini umuyoruz. Herkesin çok az bilgisi ve çok fazla fikri olduğu, "Kuş sesi müzik midir" gibi basit bir konunun bile 3.5 saat tartışılabildiği, nadiren herhangi bir konuda ortak noktada buluşunabildiği bir topluluğa katılmak istiyorsanız, aramıza hoşgeldiniz.</p>
+      <p style="font-size:0.9rem;color:var(--gri);margin-bottom:2.5rem;">İletişim: <span id="iletisim-goster" class="email-link-bordo"></span></p>
+      <h3 style="margin-bottom:1.5rem;">Yazarlar</h3>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--ecrin-acik);border-radius:6px;border-left:4px solid var(--ecrin);">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--ecrin);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#fff;flex-shrink:0;">E</div>
           <div>
-            <div style="font-family: var(--serif); font-size: 1.1rem; color: var(--ecrin); margin-bottom: 0.25rem;">Ecrin Rakıcı</div>
-            <div style="font-size: 0.85rem; color: var(--gri); line-height: 1.7;">ecrinrakici.53@gmail.com</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;color:var(--ecrin);margin-bottom:0.25rem;">Ecrin Rakıcı</div>
+            <div style="font-size:0.85rem;color:var(--gri);line-height:1.7;">ecrinrakici.53@gmail.com</div>
           </div>
         </div>
-        <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem; background: var(--mert-acik); border-radius: 6px; border-left: 4px solid var(--mert);">
-          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--mert); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: #fff; flex-shrink: 0;">M</div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--mert-acik);border-radius:6px;border-left:4px solid var(--mert);">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--mert);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#fff;flex-shrink:0;">M</div>
           <div>
-            <div style="font-family: var(--serif); font-size: 1.1rem; color: var(--mert); margin-bottom: 0.25rem;">Mert Güzel</div>
-            <div style="font-size: 0.85rem; color: var(--gri); line-height: 1.7;">mert-guzell@outlook.com</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;color:var(--mert);margin-bottom:0.25rem;">Mert Güzel</div>
+            <div style="font-size:0.85rem;color:var(--gri);line-height:1.7;">mert-guzell@outlook.com</div>
           </div>
         </div>
-        <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem; background: var(--mirza-acik); border-radius: 6px; border-left: 4px solid var(--mirza);">
-          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--mirza); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: #fff; flex-shrink: 0;">M</div>
+        <div style="display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem;background:var(--mirza-acik);border-radius:6px;border-left:4px solid var(--mirza);">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--mirza);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#fff;flex-shrink:0;">M</div>
           <div>
-            <div style="font-family: var(--serif); font-size: 1.1rem; color: var(--mirza); margin-bottom: 0.25rem;">Mirza Kasap</div>
-            <div style="font-size: 0.85rem; color: var(--gri); line-height: 1.7;">kasap.mrza@gmail.com</div>
+            <div style="font-family:var(--serif);font-size:1.1rem;color:var(--mirza);margin-bottom:0.25rem;">Mirza Kasap</div>
+            <div style="font-size:0.85rem;color:var(--gri);line-height:1.7;">kasap.mrza@gmail.com</div>
           </div>
         </div>
       </div>
@@ -363,10 +317,10 @@
   </div>
 
   <footer>
-    <span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; <span id="footer-email" class="email-link"></span> &nbsp;·&nbsp; © 2025
+    <span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; <span id="footer-email" class="email-link"></span> &nbsp;·&nbsp; &copy; 2025
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>  <script>
+  <script>
     (function() {
       var u = 'taniniblog'; var d = 'gmail' + '.com';
       var em = u + '@' + d;
@@ -377,14 +331,14 @@
       if (localStorage.getItem('tanini-tema') === 'dark') {
         document.body.classList.add('dark');
         var btn = document.getElementById('dark-btn');
-        if (btn) btn.innerHTML = '\uD83C\uDF19 &nbsp;Koyu Tema';
+        if (btn) btn.innerHTML = '&#127769; &nbsp;Koyu Tema';
       }
     })();
 
     function darkToggle() {
       var dark = document.body.classList.toggle('dark');
       var btn = document.getElementById('dark-btn');
-      btn.innerHTML = dark ? '\uD83C\uDF19 &nbsp;Koyu Tema' : '\u2600\uFE0F &nbsp;Açık Tema';
+      btn.innerHTML = dark ? '&#127769; &nbsp;Koyu Tema' : '&#9728;&#65039; &nbsp;A\u00e7\u0131k Tema';
       localStorage.setItem('tanini-tema', dark ? 'dark' : 'light');
     }
 
