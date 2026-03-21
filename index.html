@@ -360,7 +360,7 @@
     <span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; <span id="footer-email" class="email-link"></span> &nbsp;·&nbsp; © 2025
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     (function() {
       var u = 'taniniblog'; var d = 'gmail' + '.com';
       var em = u + '@' + d;
@@ -394,4 +394,17 @@
       document.getElementById('menu-overlay').classList.remove('acik');
     }
 
-    function showPage(id) 
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('page-' + id).classList.add('active');
+      document.querySelectorAll('.menu-drawer a').forEach(function(a){ a.classList.remove('active'); });
+      var anaId = id.split('-')[0];
+      var aktif = document.querySelector('.menu-drawer a.' + anaId);
+      if (aktif) aktif.classList.add('active');
+      document.getElementById('hero-banner').style.display = id === 'anasayfa' ? 'block' : 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
