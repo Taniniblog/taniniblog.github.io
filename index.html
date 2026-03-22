@@ -127,7 +127,7 @@
   <div class="menu-drawer" id="menu-drawer">
     <button class="dark-btn" id="dark-btn" onclick="darkToggle()">&#9728;&#65039; &nbsp;A&ccedil;&imath;k Tema</button>
     <hr class="menu-drawer-ayirac">
-    <a href="#" class="ecrin" onclick="showPage('ecrin'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--ecrin-orta);"></span>Ecrin Rak&imath;c&imath;</a>
+    <a href="#" class="ecrin" onclick="showPage('ecrin'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--ecrin-orta);"></span>Ecrin Rak&#305;c&#305;</a>
     <a href="#" class="mert" onclick="showPage('mert'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--mert-orta);"></span>Mert G&uuml;zel</a>
     <a href="#" class="mirza" onclick="showPage('mirza'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--mirza-orta);"></span>Mirza Kasap</a>
     <a href="#" class="misafir" onclick="showPage('misafir'); menuKapat(); return false;"><span class="menu-nokta" style="background:var(--misafir-orta);"></span>Misafir Yazarlar</a>
@@ -322,7 +322,7 @@
     <span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; <span id="footer-email" class="email-link"></span> &nbsp;·&nbsp; &copy; 2025
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     (function() {
       var u = 'taniniblog'; var d = 'gmail' + '.com';
       var em = u + '@' + d;
@@ -340,7 +340,7 @@
     function darkToggle() {
       var dark = document.body.classList.toggle('dark');
       var btn = document.getElementById('dark-btn');
-      btn.innerHTML = dark ? '&#127769; &nbsp;Koyu Tema' : '&#9728;&#65039; &nbsp;A\u00e7\u0131k Tema';
+      btn.innerHTML = dark ? '&#127769; &nbsp;Koyu Tema' : '&#9728;&#65039; &nbsp;A&#231;&#305;k Tema';
       localStorage.setItem('tanini-tema', dark ? 'dark' : 'light');
     }
 
@@ -351,3 +351,22 @@
     }
 
     function menuKapat() {
+      document.getElementById('hamburger').classList.remove('acik');
+      document.getElementById('menu-drawer').classList.remove('acik');
+      document.getElementById('menu-overlay').classList.remove('acik');
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('page-' + id).classList.add('active');
+      document.querySelectorAll('.menu-drawer a').forEach(function(a){ a.classList.remove('active'); });
+      var anaId = id.split('-')[0];
+      var aktif = document.querySelector('.menu-drawer a.' + anaId);
+      if (aktif) aktif.classList.add('active');
+      document.getElementById('hero-banner').style.display = id === 'anasayfa' ? 'block' : 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
