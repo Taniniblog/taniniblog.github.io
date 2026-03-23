@@ -67,13 +67,50 @@
         <h2 style="font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--siyah); margin: 2rem 0 1rem;">Kaynakça</h2>
         <p style="font-size: 0.9rem;">Mithen, S. (2005). <em>The Singing Neanderthals: The Origins of Music, Language, Mind and Body</em>. Weidenfeld &amp; Nicolson.</p>
     </div>
-    <div class="yazar-karti">
+  <div class="yazar-karti">
       <div class="yazar-avatar">M</div>
       <div>
         <div class="yazar-ad">Mert Güzel</div>
-        <div class="yazar-bio">mert-guzell@outlook.com</div>
+        <div class="yazar-bio"><a href="#" style="color:inherit;text-decoration:none;"><span class="em" data-u="mert-guzell" data-d="outlook.com"></span></a></div>
       </div>
     </div>
   </article>
-    <footer><span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; © 2025</footer>
-  <script data-cfas
+
+  <footer>
+    <span>Tanini</span> &nbsp;·&nbsp; Üç müzikoloji öğrencisinin not defteri &nbsp;·&nbsp; &copy; 2026
+  </footer>
+
+  <script>
+    (function() {
+      // E-posta koruma ve birleştirme kodu
+      var ems = document.querySelectorAll('.em');
+      ems.forEach(function(el) {
+        var u = el.getAttribute('data-u');
+        var d = el.getAttribute('data-d');
+        if (u && d) {
+          el.innerHTML = u + '&#64;' + d;
+          var parentLink = el.closest('a');
+          if (parentLink) {
+            parentLink.setAttribute('href', 'mailto:' + u + '@' + d);
+          }
+        }
+      });
+
+      // Sayfa yüklendiğinde temanın (dark mode) hatırlanması
+      if (localStorage.getItem('tanini-tema') === 'dark') {
+        document.body.classList.add('dark');
+        var btn = document.getElementById('dark-btn');
+        if (btn) btn.innerHTML = '&#127769; &nbsp;Koyu Tema';
+      }
+    })();
+
+    // Eğer makale sayfasında da dark mode butonu varsa çalışması için fonksiyon
+    function darkToggle() {
+      var dark = document.body.classList.toggle('dark');
+      var btn = document.getElementById('dark-btn');
+      if (btn) btn.innerHTML = dark ? '&#127769; &nbsp;Koyu Tema' : '&#9728;&#65039; &nbsp;A&#231;&#305;k Tema';
+      localStorage.setItem('tanini-tema', dark ? 'dark' : 'light');
+    }
+  </script>
+</body>
+</html>
