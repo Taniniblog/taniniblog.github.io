@@ -58,8 +58,8 @@
       <p>İnsan sesinin nasıl oluştuğu ve yapay olarak nasıl üretilebileceği oldukça merak uyandırıcı bir konudur. Nitekim konuşma işlemenin tarihi 200 yıldan daha eskiye dayanır. Bu alandaki ilk büyük adımı atan Macar mucit W. Von Kempelen, insan konuşmasının çeşitli seslerini, her ne kadar basit bir şekilde olsa da taklit edebilen mekanik bir konuşma cihazı inşa eden ilk kişi olmuştur.</p>
 
       <div class="img-yan-yana">
-        <img src="img/vocoder-1.jpg" alt="W. Von Kempelen'nin mekanik konuşma cihazının çizimi">
-        <img src="img/vocoder-2.jpg" alt="Mekanik konuşma cihazının detay fotoğrafı">
+        <img src="img-vocoder-1.jpg" alt="W. Von Kempelen'nin mekanik konuşma cihazının çizimi">
+        <img src="img-vocoder-2.jpg" alt="Mekanik konuşma cihazının detay fotoğrafı">
       </div>
 
       <p>Kempelen'in ilk konuşan mekanik cihazından sonra telekomünikasyon alanındaki bir sonraki büyük sıçrama şüphesiz Alexander Graham Bell'in telefonu icat etmesiydi. Aslında Bell'in birincil mesleği insan vokal aygıtının çalışma prensiplerini araştıran bir konuşma bilimcisiydi. Bu sayede "spektral zarf"ın (sesin karakteristiğinin) temellerini anlamıştı. Ancak icadı temelde dalga formlarını ileten bir vericiydi; konuşmayı işlemek ve modellemek ikincil planda kalmıştı.</p>
@@ -70,11 +70,11 @@
 
       <p>Dudley, 1928 yılında telefon hatlarında ses verisini sıkıştırarak kıtalar arası iletişimi daha verimli hale getirmek amacıyla Vocoder (ses kodlayıcı) sistemini geliştirdi. Vocoder, bir konuşma dalgasındaki belirli parametreleri analiz ediyor ve bu parametreleri daha sonra konuşmayı yeniden üreten bir sentezleyiciyi kontrol etmek için kullanılıyordu.</p>
 
-      <img src="img/vocoder-3.jpg" alt="Vocoder sistem şeması — fikir, mesaj, taşıyıcı, modülatörler ve hoparlör">
+      <img src="img-vocoder-3.jpg" alt="Vocoder sistem şeması — fikir, mesaj, taşıyıcı, modülatörler ve hoparlör">
 
       <p>Voder ise 1939 yılında New York ve San Francisco'daki dünya fuarında ilk kez sahneye çıktığında insanlarda yoğun bir merak uyandırdı. Sistemi devasa bir müzik aleti gibi düşünebilirsiniz. Cihaz, piyano klavyesine benzer bir konsolun başında duran eğitimli bir insan tarafından kontrol ediliyordu.</p>
 
-      <img class="img-kucuk" src="img/vocoder-4.jpg" alt="Voder operatörü konsolun başında">
+      <img class="img-kucuk" src="img-vocoder-4.jpg" alt="Voder operatörü konsolun başında">
 
       <p>Operatörün parmakları klavyedeki tuşlara basarak o an hangi frekans bantlarının duyulacağını seçiyordu; bir başka deyişle sesi filtreliyordu. Operatörün hemen bileğinin altında, bileği ile kontrol ettiği bir çubuk (wrist bar) vardı. Eğer "A", "E" gibi ünlü harfleri veya genizden gelen nazal sesleri çıkaracaksa bu çubuğu vızıltı (buzz) yani sesli konuma getiriyordu. Eğer "S", "Ş", "F" gibi sürtünmeli sessiz harfler gerekiyorsa çubuğu tıslama (hiss) konumuna itiyordu. Operatör, ayağı ile kontrol edebildiği bir pedala da sahipti. Pitch Pedal olarak adı geçen bu pedal, makine ile üretilen kelimelerin entonasyonunu değiştirerek insansı bir duygu katmak için kullanılıyordu.</p>
 
@@ -82,13 +82,13 @@
 
       <p>Vocoder'ın bir insan sesini analiz edebilmesinin ve bu sesi elektronik olarak yeniden üretebilmesinin temelinde, insan ses yolunun anatomisini matematiksel verilere dönüştürebilmesi yatar. Bu noktada karşımıza spektral zarf (spectral envelope) adında bir kavram çıkar. Spektral zarf, insanın konuşma sinyalindeki filtreleme özelliklerini temsil eden ve zamanla değişen dinamiklere verilen addır. Konuştuğumuzda veya şarkı söylediğimizde, ses tellerimizden çıkan ham ses dalgası ağız ve boğaz boşluğumuzda şekillenir.</p>
 
-      <img src="img/vocoder-5.jpg" alt="Ses yolu anatomisi ve farklı ünlüler için frekans grafikleri">
+      <img src="img-vocoder-5.jpg" alt="Ses yolu anatomisi ve farklı ünlüler için frekans grafikleri">
 
       <h2>Formantlar</h2>
 
       <p>Bu zarfın içinde, sesin güçlü olduğu tepe noktaları vardır. Formantlar, vokal ses yolunun rezonansları olarak tanımlanır. Örneğin farklı ünlü harfleri çıkardığımızda boğazımızın ve ağzımızın şekli değiştiği için tınlama noktaları da değişir. Sinyalin zaman alanındaki genlik değişimlerini bu tınlama noktalarını tespit etmek için yeterli değildir. Dolayısıyla sesin karakteristiğini belirleyen frekans içeriğini analiz etmede Fourier dönüşümleri kritik bir rol oynar. Bu matematiksel dönüşüm, zaman alanındaki sinyali frekans alanındaki genlik spektrumuna çevirir.</p>
 
-      <img src="img/vocoder-6.jpg" alt="Zaman alanından frekans alanına dönüşüm — Fourier dönüşümü">
+      <img src="img-vocoder-6.jpg" alt="Zaman alanından frekans alanına dönüşüm — Fourier dönüşümü">
 
       <h2>Sonuç</h2>
 
